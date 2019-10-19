@@ -1,8 +1,9 @@
-import java.text.ParseException;
+package model;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Operation {
+public class Operation{
     private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     private String operationType;
@@ -13,14 +14,6 @@ public class Operation {
 
     public Operation() {}
 
-    public Operation(String operationType, int sum, String operationName, String familyMember, LocalDate operationDate) {
-        this.operationType = operationType;
-        this.sum = sum;
-        this.operationName = operationName;
-        this.familyMember = familyMember;
-        this.operationDate = operationDate;
-    }
-
     public Operation(String str){
         String[] substrArr;
         String delimiter = " ";
@@ -30,8 +23,6 @@ public class Operation {
         sum = Integer.parseInt(substrArr[1].substring(0, substrArr[1].length() - 1));
         operationName = substrArr[2];
         familyMember = substrArr[3];
-
-        System.out.println(substrArr[4]);
         operationDate = LocalDate.parse(substrArr[4], FORMATTER);
     }
 
@@ -77,7 +68,7 @@ public class Operation {
 
     @Override
     public String toString() {
-        return "Operation{" +
+        return "model.Operation{" +
                 "operationType='" + operationType + '\'' +
                 ", sum='" + sum + '\'' +
                 ", operationName='" + operationName + '\'' +
