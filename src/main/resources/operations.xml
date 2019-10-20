@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<operations>
+    <operation>
+        <familyMember>мама</familyMember>
+        <operation_date>2019-10-10</operation_date>
+        <operationName>мойка</operationName>
+        <operationType>расход</operationType>
+        <sum>500</sum>
+    </operation>
+    <operation>
+        <familyMember>мама</familyMember>
+        <operation_date>2019-10-10</operation_date>
+        <operationName>мойка</operationName>
+        <operationType>расход</operationType>
+        <sum>500</sum>
+    </operation>
+    <operation>
+        <familyMember>мама</familyMember>
+        <operation_date>2019-10-10</operation_date>
+        <operationName>мойка</operationName>
+        <operationType>расход</operationType>
+        <sum>500</sum>
+    </operation>
+    <operation>
+        <familyMember>сын</familyMember>
+        <operation_date>2019-01-01</operation_date>
+        <operationName>кино</operationName>
+        <operationType>расход</operationType>
+        <sum>358</sum>
+    </operation>
+    <operation>
+        <familyMember>сын</familyMember>
+        <operation_date>2019-01-01</operation_date>
+        <operationName>кино</operationName>
+        <operationType>расход</operationType>
+        <sum>358</sum>
+    </operation>
+</operations>
