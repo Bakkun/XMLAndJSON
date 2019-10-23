@@ -1,5 +1,8 @@
 package model;
 
+import adapter.DateFormatAdapter;
+
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -62,6 +65,7 @@ public class Operation{
         return operationDate;
     }
 
+    @XmlJavaTypeAdapter(value = DateFormatAdapter.class )
     public void setOperationDate(LocalDate operationDate) {
         this.operationDate = operationDate;
     }

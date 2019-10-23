@@ -1,101 +1,35 @@
 [
   {
     "operationType": "расход",
-    "sum": 100,
-    "operationName": "бананы",
-    "familyMember": "жена",
+    "sum": 300,
+    "operationName": "маникюр",
+    "familyMember": "мама",
+    "operationDate": {
+      "year": 2019,
+      "month": 5,
+      "day": 1
+    }
+  },
+  {
+    "operationType": "расход",
+    "sum": 30990,
+    "operationName": "смартфон",
+    "familyMember": "сын",
     "operationDate": {
       "year": 2019,
       "month": 10,
-      "day": 19
-    }
-  },
-  {
-    "operationType": "расход",
-    "sum": 20,
-    "operationName": "батарейка",
-    "familyMember": "муж",
-    "operationDate": {
-      "year": 2019,
-      "month": 1,
-      "day": 1
-    }
-  },
-  {
-    "operationType": "расход",
-    "sum": 20,
-    "operationName": "батарейка",
-    "familyMember": "муж",
-    "operationDate": {
-      "year": 2019,
-      "month": 1,
-      "day": 1
+      "day": 23
     }
   },
   {
     "operationType": "доход",
     "sum": 60000,
     "operationName": "зарплата",
-    "familyMember": "муж",
-    "operationDate": {
-      "year": 2019,
-      "month": 1,
-      "day": 25
-    }
-  },
-  {
-    "operationType": "доход",
-    "sum": 10000,
-    "operationName": "стипендия",
-    "familyMember": "сын",
-    "operationDate": {
-      "year": 2019,
-      "month": 2,
-      "day": 25
-    }
-  },
-  {
-    "operationType": "доход",
-    "sum": 100000,
-    "operationName": "перевод",
-    "familyMember": "сын",
-    "operationDate": {
-      "year": 2019,
-      "month": 12,
-      "day": 25
-    }
-  },
-  {
-    "operationType": "расход",
-    "sum": 100,
-    "operationName": "яблоки",
-    "familyMember": "жена",
+    "familyMember": "отец",
     "operationDate": {
       "year": 2019,
       "month": 10,
-      "day": 19
-    }
-  },
-  {
-    "operationType": "расход",
-    "sum": 358,
-    "operationName": "кино",
-    "familyMember": "сын",
-    "operationDate": {
-      "year": 2019,
-      "month": 1,
-      "day": 1
-    }
-  },
-  {
-    "operationType": "расход",
-    "sum": 358,
-    "operationName": "кино",
-    "familyMember": "сын",
-    "operationDate": {
-      "year": 2019,
-      "month": 1,
-      "day": 1
+      "day": 25
     }
   }
 ]
