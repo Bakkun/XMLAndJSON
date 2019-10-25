@@ -1,0 +1,35 @@
+[
+  {
+    "operationType": "расход",
+    "sum": 300,
+    "operationName": "маникюр",
+    "familyMember": "мама",
+    "operationDate": {
+      "year": 2019,
+      "month": 5,
+      "day": 1
+    }
+  },
+  {
+    "operationType": "расход",
+    "sum": 30990,
+    "operationName": "смартфон",
+    "familyMember": "сын",
+    "operationDate": {
+      "year": 2019,
+      "month": 10,
+      "day": 23
+    }
+  },
+  {
+    "operationType": "доход",
+    "sum": 60000,
+    "operationName": "зарплата",
+    "familyMember": "отец",
+    "operationDate": {
+      "year": 2019,
+      "month": 10,
+      "day": 25
+    }
+  }
+]
