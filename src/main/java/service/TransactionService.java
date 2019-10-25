@@ -37,7 +37,7 @@ public class TransactionService implements BusinessOperations {
         }
     }
 
-    public void save() throws IOException {
+    public void handle() throws IOException {
         storageHandler.saveAllOperations(this.operations);
     }
 
@@ -45,7 +45,7 @@ public class TransactionService implements BusinessOperations {
         return this.operations;
     }
 
-    public void addOperation(Operation operation) throws IOException {
+    public void addOperation(Operation operation) {
         this.operations.add(operation);
     }
 
