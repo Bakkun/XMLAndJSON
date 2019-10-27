@@ -31,5 +31,60 @@
       "month": 10,
       "day": 25
     }
+  },
+  {
+    "operationType": "расход",
+    "sum": 47000,
+    "operationName": "айфон",
+    "familyMember": "сын",
+    "operationDate": {
+      "year": 2019,
+      "month": 10,
+      "day": 29
+    }
+  },
+  {
+    "operationType": "доход",
+    "sum": 100000,
+    "operationName": "перевод",
+    "familyMember": "мама",
+    "operationDate": {
+      "year": 2018,
+      "month": 12,
+      "day": 10
+    }
+  },
+  {
+    "operationType": "расход",
+    "sum": 87,
+    "operationName": "бананы",
+    "familyMember": "отец",
+    "operationDate": {
+      "year": 2019,
+      "month": 10,
+      "day": 27
+    }
+  },
+  {
+    "operationType": "расход",
+    "sum": 500,
+    "operationName": "игрушка",
+    "familyMember": "мама",
+    "operationDate": {
+      "year": 2019,
+      "month": 8,
+      "day": 31
+    }
+  },
+  {
+    "operationType": "доход",
+    "sum": 5000,
+    "operationName": "подарок",
+    "familyMember": "отец",
+    "operationDate": {
+      "year": 2019,
+      "month": 6,
+      "day": 3
+    }
   }
 ]

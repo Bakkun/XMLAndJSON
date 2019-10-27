@@ -28,4 +28,18 @@
         <operationType>доход</operationType>
         <sum>60000</sum>
     </operation>
+    <operation>
+        <familyMember>отец</familyMember>
+        <operationDate>2019-06-03</operationDate>
+        <operationName>подарок</operationName>
+        <operationType>доход</operationType>
+        <sum>5000</sum>
+    </operation>
+    <operation>
+        <familyMember>сын</familyMember>
+        <operationDate>2019-10-26</operationDate>
+        <operationName>кит-кат</operationName>
+        <operationType>расход</operationType>
+        <sum>59</sum>
+    </operation>
 </operations>

@@ -1,5 +1,8 @@
 package interfaces;
 
 public interface BusinessOperations {
-    void moneyMovementInPeriod(String dateSinceStr, String dateToStr, String type);
+    void getByPeriodAndType(String dateSinceStr, String dateToStr, String type);
+    int balance();
+    void getByType(String type);
+    void getByPeriod(String dateSinceStr, String dateToStr);
 }

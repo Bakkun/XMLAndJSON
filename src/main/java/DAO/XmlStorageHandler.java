@@ -16,7 +16,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -75,10 +74,6 @@ public class XmlStorageHandler implements StorageHandler {
     static class Operations {
         @XmlElement(name = "operation")
         private List<Operation> operations = null;
-
-        List<Operation> getOperations() {
-            return new ArrayList<>(operations);
-        }
 
         void setOperations(List<Operation> operations) {
             this.operations = new ArrayList<>(operations);
