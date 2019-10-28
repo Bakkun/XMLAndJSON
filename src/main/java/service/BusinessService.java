@@ -1,6 +1,7 @@
 package service;
 
 import interfaces.BusinessOperations;
+import interfaces.OperationsHandler;
 import model.Operation;
 
 import java.time.LocalDate;
@@ -12,8 +13,8 @@ public class BusinessService implements BusinessOperations {
     private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private List<Operation> operations;
 
-    public BusinessService(TransactionService ts) {
-        this.operations = new ArrayList<>(ts.getOperations());
+    public BusinessService(OperationsHandler gt) {
+        this.operations = new ArrayList<>(gt.getOperations());
     }
 
     @Override

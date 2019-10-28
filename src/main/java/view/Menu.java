@@ -1,5 +1,7 @@
 package view;
 
+import interfaces.BusinessOperations;
+import interfaces.OperationsHandler;
 import model.Operation;
 import service.BusinessService;
 import service.TransactionService;
@@ -10,20 +12,20 @@ import java.util.Properties;
 import java.util.Scanner;
 
 public class Menu {
-    private TransactionService transactionService;
-    private BusinessService businessService;
+    private OperationsHandler transactionServiceOperations;
+    private BusinessOperations businessServiceOperations;
     private Scanner in = new Scanner(System.in);
 
     public Menu() {
         try {
-            FileInputStream fis = new FileInputStream("D:\\JProjects\\XMLAndJSON\\src\\main\\resources\\application.properties");
+            FileInputStream fis = new FileInputStream(".\\src\\main\\resources\\application.properties");
             Properties property = new Properties();
             property.load(fis);
             String str = property.getProperty("defaultFile");
 
-            transactionService = new TransactionService(str);
-            transactionService.load();
-            businessService = new BusinessService(transactionService);
+            transactionServiceOperations = new TransactionService(str);
+            transactionServiceOperations.load();
+            businessServiceOperations = new BusinessService(transactionServiceOperations);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -46,27 +48,27 @@ public class Menu {
             switch (menuItem) {
                 case 1:
                     System.out.println("Список всех оперций:");
-                    for (Operation operation : transactionService.getOperations()) {
+                    for (Operation operation : transactionServiceOperations.getOperations()) {
                         System.out.println(operation);
                     }
                     break;
                 case 2:
                     System.out.println("Введите данные в формате <тип операции> <сумма> <наименование операции> <человек> <Дата (dd.mm.yyyy)>:");
                     String operationInfo = scanner.nextLine();
-                    transactionService.handleOperations(new Operation(operationInfo));
+                    transactionServiceOperations.handleOperations(new Operation(operationInfo));
                     break;
                 case 3:
-                    System.out.print("Текущий баланс семьи: " + businessService.balance() + "р");
+                    System.out.print("Текущий баланс семьи: " + businessServiceOperations.balance() + "р\n");
                     break;
                 case 4:
                     System.out.println("Вводите даты в формате dd.mm.yyyy!");
-                    System.out.println("Введите дату с которой нужно начинать искать:");
+                    System.out.println("Введите дату, с которой нужно искать:");
                     String dateSince = scanner.nextLine();
-                    System.out.println("Введите дату по которую нужно начинать искать:");
+                    System.out.println("Введите дату, по которую нужно искать:");
                     String dateTo = scanner.nextLine();
                     System.out.println("Введите тип операции (доход/расход):");
                     String type = scanner.nextLine();
-                    businessService.getByPeriodAndType(dateSince, dateTo, type);
+                    businessServiceOperations.getByPeriodAndType(dateSince, dateTo, type);
                     break;
                 case 0:
                     System.out.println("Завершение работы...");
