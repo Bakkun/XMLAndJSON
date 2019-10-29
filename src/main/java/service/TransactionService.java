@@ -1,7 +1,5 @@
 package service;
 
-import DAO.JsonStorageHandler;
-import DAO.XmlStorageHandler;
 import interfaces.OperationsHandler;
 import interfaces.StorageHandler;
 import model.Operation;
@@ -19,14 +17,8 @@ public class TransactionService implements OperationsHandler {
         return new ArrayList<>(this.operations);
     }
 
-    public TransactionService(String fileName) {
-        if (fileName.endsWith(".xml")) {
-            storageHandler = new XmlStorageHandler(fileName);
-        } else if (fileName.endsWith(".json")) {
-            storageHandler = new JsonStorageHandler(fileName);
-        } else {
-            throw new RuntimeException("неподдерж файл");
-        }
+    public TransactionService(StorageHandler storageHandler) {
+        this.storageHandler = storageHandler;
     }
 
     @Override

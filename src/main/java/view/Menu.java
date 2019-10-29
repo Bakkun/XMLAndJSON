@@ -1,7 +1,10 @@
 package view;
 
+import DAO.JsonStorageHandler;
+import DAO.XmlStorageHandler;
 import interfaces.BusinessOperations;
 import interfaces.OperationsHandler;
+import interfaces.StorageHandler;
 import model.Operation;
 import service.BusinessService;
 import service.TransactionService;
@@ -21,9 +24,18 @@ public class Menu {
             FileInputStream fis = new FileInputStream(".\\src\\main\\resources\\application.properties");
             Properties property = new Properties();
             property.load(fis);
-            String str = property.getProperty("defaultFile");
+            String fileName = property.getProperty("defaultFile");
 
-            transactionServiceOperations = new TransactionService(str);
+            StorageHandler storageHandler = null;
+            if (fileName.endsWith(".xml")) {
+                storageHandler = new XmlStorageHandler(fileName);
+            } else if (fileName.endsWith(".json")) {
+                storageHandler = new JsonStorageHandler(fileName);
+            } else {
+                throw new RuntimeException("Неподдерживаемый тип файла.");
+            }
+
+            transactionServiceOperations = new TransactionService(storageHandler);
             transactionServiceOperations.load();
             businessServiceOperations = new BusinessService(transactionServiceOperations);
         } catch (IOException e) {
