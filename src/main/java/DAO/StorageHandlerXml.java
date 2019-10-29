@@ -1,6 +1,5 @@
 package DAO;
 
-import interfaces.StorageHandler;
 import model.Operation;
 
 import javax.xml.bind.JAXBContext;
@@ -19,12 +18,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class XmlStorageHandler implements StorageHandler {
+public class StorageHandlerXml implements StorageHandler {
     private String fileName;
 
-    public XmlStorageHandler() {}
+    public StorageHandlerXml() {}
 
-    public XmlStorageHandler(String fileName) {
+    public StorageHandlerXml(String fileName) {
         this.fileName = fileName;
     }
 
@@ -50,7 +49,7 @@ public class XmlStorageHandler implements StorageHandler {
     @Override
     public void saveAllOperations(List<Operation> operations) throws IOException{
         try {
-            JAXBContext jaxbContext = JAXBContext.newInstance(DAO.XmlStorageHandler.Operations.class);
+            JAXBContext jaxbContext = JAXBContext.newInstance(StorageHandlerXml.Operations.class);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 

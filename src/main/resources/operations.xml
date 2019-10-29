@@ -1,45 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <operations>
     <operation>
+        <operationDate>2010-10-10</operationDate>
         <familyMember>мама</familyMember>
-        <operationDate>2019-05-01</operationDate>
-        <operationName>маникюр</operationName>
-        <operationType>расход</operationType>
-        <sum>300</sum>
-    </operation>
-    <operation>
-        <familyMember>мама</familyMember>
-        <operationDate>2019-05-01</operationDate>
-        <operationName>маникюр</operationName>
-        <operationType>расход</operationType>
-        <sum>300</sum>
-    </operation>
-    <operation>
-        <familyMember>сын</familyMember>
-        <operationDate>2019-10-23</operationDate>
-        <operationName>смартфон</operationName>
-        <operationType>расход</operationType>
-        <sum>30990</sum>
-    </operation>
-    <operation>
-        <familyMember>отец</familyMember>
-        <operationDate>2019-10-25</operationDate>
-        <operationName>зарплата</operationName>
+        <operationName>премия</operationName>
         <operationType>доход</operationType>
-        <sum>60000</sum>
-    </operation>
-    <operation>
-        <familyMember>отец</familyMember>
-        <operationDate>2019-06-03</operationDate>
-        <operationName>подарок</operationName>
-        <operationType>доход</operationType>
-        <sum>5000</sum>
-    </operation>
-    <operation>
-        <familyMember>сын</familyMember>
-        <operationDate>2019-10-26</operationDate>
-        <operationName>кит-кат</operationName>
-        <operationType>расход</operationType>
-        <sum>59</sum>
+        <sum>150000</sum>
     </operation>
 </operations>

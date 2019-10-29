@@ -1,22 +1,27 @@
 package view;
 
-import DAO.JsonStorageHandler;
-import DAO.XmlStorageHandler;
-import interfaces.BusinessOperations;
-import interfaces.OperationsHandler;
-import interfaces.StorageHandler;
-import model.Operation;
-import service.BusinessService;
+import DAO.StorageHandlerJson;
+import DAO.StorageHandlerXml;
+import service.OperationService;
 import service.TransactionService;
+import DAO.StorageHandler;
+import model.Operation;
+import service.OperationServiceImpl;
+import service.TransactionServiceImpl;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.Properties;
 import java.util.Scanner;
 
 public class Menu {
-    private OperationsHandler transactionServiceOperations;
-    private BusinessOperations businessServiceOperations;
+    private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+    private TransactionService transactionServiceOperations;
+    private OperationService operationService;
     private Scanner in = new Scanner(System.in);
 
     public Menu() {
@@ -26,18 +31,18 @@ public class Menu {
             property.load(fis);
             String fileName = property.getProperty("defaultFile");
 
-            StorageHandler storageHandler = null;
+            StorageHandler storageHandler;
             if (fileName.endsWith(".xml")) {
-                storageHandler = new XmlStorageHandler(fileName);
+                storageHandler = new StorageHandlerXml(fileName);
             } else if (fileName.endsWith(".json")) {
-                storageHandler = new JsonStorageHandler(fileName);
+                storageHandler = new StorageHandlerJson(fileName);
             } else {
                 throw new RuntimeException("Неподдерживаемый тип файла.");
             }
 
-            transactionServiceOperations = new TransactionService(storageHandler);
+            transactionServiceOperations = new TransactionServiceImpl(storageHandler);
             transactionServiceOperations.load();
-            businessServiceOperations = new BusinessService(transactionServiceOperations);
+            operationService = new OperationServiceImpl(transactionServiceOperations);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -60,8 +65,12 @@ public class Menu {
             switch (menuItem) {
                 case 1:
                     System.out.println("Список всех оперций:");
-                    for (Operation operation : transactionServiceOperations.getOperations()) {
-                        System.out.println(operation);
+                    if (transactionServiceOperations.getOperations().isEmpty()) {
+                        System.out.println("Пока что операций нет.");
+                    } else {
+                        for (Operation operation : transactionServiceOperations.getOperations()) {
+                            System.out.println(operation);
+                        }
                     }
                     break;
                 case 2:
@@ -70,17 +79,25 @@ public class Menu {
                     transactionServiceOperations.handleOperations(new Operation(operationInfo));
                     break;
                 case 3:
-                    System.out.print("Текущий баланс семьи: " + businessServiceOperations.balance() + "р\n");
+                    System.out.print("Текущий баланс семьи: " + operationService.balance() + "р\n");
                     break;
                 case 4:
                     System.out.println("Вводите даты в формате dd.mm.yyyy!");
                     System.out.println("Введите дату, с которой нужно искать:");
-                    String dateSince = scanner.nextLine();
+                    String dateSinceStr = scanner.nextLine();
                     System.out.println("Введите дату, по которую нужно искать:");
-                    String dateTo = scanner.nextLine();
+                    String dateToStr = scanner.nextLine();
                     System.out.println("Введите тип операции (доход/расход):");
                     String type = scanner.nextLine();
-                    businessServiceOperations.getByPeriodAndType(dateSince, dateTo, type);
+                    LocalDate dateSince = LocalDate.parse(dateSinceStr, FORMATTER);
+                    LocalDate dateTo = LocalDate.parse(dateToStr, FORMATTER);
+                    if (operationService.getOperationsByPeriodAndType(dateSince, dateTo, type).isEmpty()) {
+                        System.out.println("Записей, удовлетворяющих условиям нет в спике операций.");
+                    } else {
+                        for (Operation operation : operationService.getOperationsByPeriodAndType(dateSince, dateTo, type)) {
+                            System.out.println(operation);
+                        }
+                    }
                     break;
                 case 0:
                     System.out.println("Завершение работы...");

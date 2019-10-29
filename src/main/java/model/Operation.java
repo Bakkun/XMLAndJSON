@@ -1,6 +1,6 @@
 package model;
 
-import adapter.DateFormatAdapter;
+import adapter.LocalDateFormatAdapter;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
@@ -13,6 +13,7 @@ public class Operation{
     private int sum;
     private String operationName;
     private String familyMember;
+    @XmlJavaTypeAdapter(value = LocalDateFormatAdapter.class)
     private LocalDate operationDate;
 
     public Operation() {}
@@ -65,10 +66,10 @@ public class Operation{
         return operationDate;
     }
 
-    @XmlJavaTypeAdapter(value = DateFormatAdapter.class )
-    public void setOperationDate(LocalDate operationDate) {
-        this.operationDate = operationDate;
-    }
+//    @XmlJavaTypeAdapter(value = LocalDateFormatAdapter.class )
+//    public void setOperationDate(LocalDate operationDate) {
+//        this.operationDate = operationDate;
+//    }
 
     @Override
     public String toString() {
