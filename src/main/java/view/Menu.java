@@ -1,23 +1,26 @@
 package view;
 
+import DAO.StorageHandler;
 import DAO.StorageHandlerJson;
 import DAO.StorageHandlerXml;
-import service.OperationService;
-import service.TransactionService;
-import DAO.StorageHandler;
 import model.Operation;
+import service.OperationService;
 import service.OperationServiceImpl;
+import service.TransactionService;
 import service.TransactionServiceImpl;
 
+import javax.xml.bind.JAXBException;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Collections;
 import java.util.Properties;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Menu {
+    private static Logger log = Logger.getLogger(Menu.class.getName());
     private final static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     private TransactionService transactionServiceOperations;
@@ -26,10 +29,10 @@ public class Menu {
 
     public Menu() {
         try {
-            FileInputStream fis = new FileInputStream(".\\src\\main\\resources\\application.properties");
-            Properties property = new Properties();
-            property.load(fis);
-            String fileName = property.getProperty("defaultFile");
+            FileInputStream fileInputStream = new FileInputStream(".\\src\\main\\resources\\application.properties");
+            Properties properties = new Properties();
+            properties.load(fileInputStream);
+            String fileName = properties.getProperty("defaultFile");
 
             StorageHandler storageHandler;
             if (fileName.endsWith(".xml")) {
@@ -44,7 +47,10 @@ public class Menu {
             transactionServiceOperations.load();
             operationService = new OperationServiceImpl(transactionServiceOperations);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.log(Level.SEVERE, "Error working with file.", e);
+        }
+        catch (JAXBException e) {
+            log.log(Level.SEVERE, "Error working with JAXB.", e);
         }
     }
 
@@ -54,6 +60,7 @@ public class Menu {
         System.out.println("3. Узнать текущий баланс семьи.");
         System.out.println("4. Данные об операциях за определённый период времени.");
         System.out.println("0. Выход.");
+        log.fine("print menu method started");
     }
 
     public void handleUserInput() throws IOException {
@@ -72,11 +79,14 @@ public class Menu {
                             System.out.println(operation);
                         }
                     }
+                    log.log(Level.FINE, "A list of all operations was requested.");
                     break;
                 case 2:
                     System.out.println("Введите данные в формате <тип операции> <сумма> <наименование операции> <человек> <Дата (dd.mm.yyyy)>:");
                     String operationInfo = scanner.nextLine();
-                    transactionServiceOperations.handleOperations(new Operation(operationInfo));
+                    Operation operationToSave = new Operation(operationInfo);
+                    transactionServiceOperations.handleOperations(operationToSave);
+                    log.log(Level.FINE, "New operation was added: " + operationToSave);
                     break;
                 case 3:
                     System.out.print("Текущий баланс семьи: " + operationService.balance() + "р\n");
@@ -93,17 +103,22 @@ public class Menu {
                     LocalDate dateTo = LocalDate.parse(dateToStr, FORMATTER);
                     if (operationService.getOperationsByPeriodAndType(dateSince, dateTo, type).isEmpty()) {
                         System.out.println("Записей, удовлетворяющих условиям нет в спике операций.");
+                        log.log(Level.FINE, "Operations under specified conditions not found.");
                     } else {
+                        StringBuilder str = new StringBuilder();
                         for (Operation operation : operationService.getOperationsByPeriodAndType(dateSince, dateTo, type)) {
-                            System.out.println(operation);
-                        }
+                            str.append(operation).append(";\n");
+                            System.out.println(operation);                        }
+                        log.log(Level.FINE, "List of operations under specified conditions: \n" + str);
                     }
                     break;
                 case 0:
                     System.out.println("Завершение работы...");
+                    log.log(Level.FINE, "Shutdown...");
                     System.exit(1);
                 default:
                     System.out.println("Неверный выбор.");
+                    log.log(Level.WARNING, "Wrong choice was made.");
             }
         } while(true);
     }

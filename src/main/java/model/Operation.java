@@ -13,7 +13,7 @@ public class Operation{
     private int sum;
     private String operationName;
     private String familyMember;
-    @XmlJavaTypeAdapter(value = LocalDateFormatAdapter.class)
+
     private LocalDate operationDate;
 
     public Operation() {}
@@ -34,42 +34,42 @@ public class Operation{
         return operationType;
     }
 
-    public void setOperationType(String operationType) {
-        this.operationType = operationType;
-    }
-
     public int getSum() {
         return sum;
-    }
-
-    public void setSum(int sum) {
-        this.sum = sum;
     }
 
     public String getOperationName() {
         return operationName;
     }
 
-    public void setOperationName(String operationName) {
-        this.operationName = operationName;
-    }
-
     public String getFamilyMember() {
         return familyMember;
-    }
-
-    public void setFamilyMember(String familyMember) {
-        this.familyMember = familyMember;
     }
 
     public LocalDate getOperationDate() {
         return operationDate;
     }
 
-//    @XmlJavaTypeAdapter(value = LocalDateFormatAdapter.class )
-//    public void setOperationDate(LocalDate operationDate) {
-//        this.operationDate = operationDate;
-//    }
+    public void setOperationType(String operationType) {
+        this.operationType = operationType;
+    }
+
+    public void setSum(int sum) {
+        this.sum = sum;
+    }
+
+    public void setOperationName(String operationName) {
+        this.operationName = operationName;
+    }
+
+    public void setFamilyMember(String familyMember) {
+        this.familyMember = familyMember;
+    }
+
+    @XmlJavaTypeAdapter(value = LocalDateFormatAdapter.class)
+    public void setOperationDate(LocalDate operationDate) {
+        this.operationDate = operationDate;
+    }
 
     @Override
     public String toString() {

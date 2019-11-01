@@ -97,5 +97,38 @@
       "month": 10,
       "day": 30
     }
+  },
+  {
+    "operationType": "расход",
+    "sum": 200,
+    "operationName": "бананы",
+    "familyMember": "мама",
+    "operationDate": {
+      "year": 2019,
+      "month": 10,
+      "day": 31
+    }
+  },
+  {
+    "operationType": "расход",
+    "sum": 200,
+    "operationName": "сумка",
+    "familyMember": "отец",
+    "operationDate": {
+      "year": 2019,
+      "month": 10,
+      "day": 31
+    }
+  },
+  {
+    "operationType": "доход",
+    "sum": 5000,
+    "operationName": "стипендия",
+    "familyMember": "сын",
+    "operationDate": {
+      "year": 2019,
+      "month": 10,
+      "day": 25
+    }
   }
 ]

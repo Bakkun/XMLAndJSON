@@ -10,61 +10,62 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class StorageHandlerXml implements StorageHandler {
+    private static Logger log = Logger.getLogger(StorageHandlerXml.class.getName());
+
     private String fileName;
+    private Marshaller jaxbMarshaller;
+    private Unmarshaller jaxbUnmarshaller;
+    private Operations operations;
 
     public StorageHandlerXml() {}
 
-    public StorageHandlerXml(String fileName) {
+    public StorageHandlerXml(String fileName) throws JAXBException {
         this.fileName = fileName;
+        JAXBContext jaxbContext = JAXBContext.newInstance(Operations.class);
+        jaxbMarshaller = jaxbContext.createMarshaller();
+        jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+        jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        this.operations = new Operations();
     }
 
     @Override
-    public List<Operation> getAllOperations() throws IOException {
+    public List<Operation> getAllOperations() {
         try {
-            JAXBContext jaxbContext = JAXBContext.newInstance(Operations.class);
-            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-            Operations operations = (Operations) jaxbUnmarshaller.unmarshal(new FileReader(fileName));
-
+            operations = (Operations) jaxbUnmarshaller.unmarshal(new FileReader(fileName));
+            log.log(Level.FINE, "Unload operations from .xml file.");
             return operations.operations;
-        } catch (JAXBException | FileNotFoundException e) {
-            e.printStackTrace();
-            try {
-                throw e;
-            } catch (JAXBException ex) {
-                ex.printStackTrace();
-            }
+        } catch (JAXBException e) {
+            log.log(Level.SEVERE, "Failed unload operations from .xml file.", e);
+        } catch (IOException e) {
+            log.log(Level.SEVERE, "Failed read the .xml file.");
         }
         return Collections.emptyList();
     }
 
     @Override
-    public void saveAllOperations(List<Operation> operations) throws IOException{
-        try {
-            JAXBContext jaxbContext = JAXBContext.newInstance(StorageHandlerXml.Operations.class);
-            Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+    public void saveAllOperations(List<Operation> operationsFromApp) {
+        this.operations.setOperations(operationsFromApp);
+        persistOperations(this.operations);
+        log.log(Level.FINE, "Operations was saved to the .xml file.");
+    }
 
-            Operations operations1 = new Operations();
-            operations1.setOperations(operations);
-
-            try (FileWriter writer = new FileWriter(fileName)) {
-                jaxbMarshaller.marshal(operations1, writer);
-            } catch (IOException e) {
-                e.printStackTrace();
-                throw e;
-            }
+    private void persistOperations(Operations operations) {
+        try (FileWriter writer = new FileWriter(fileName)) {
+            jaxbMarshaller.marshal(operations, writer);
+        } catch (IOException e) {
+            log.log(Level.SEVERE, "Failed write to the .xml file.", e);
         } catch (JAXBException e) {
-            e.printStackTrace();
-            throw new IOException(e);
+            log.log(Level.SEVERE, "Failed to persist operations to the .xml file.", e);
         }
     }
 

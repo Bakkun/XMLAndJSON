@@ -6,9 +6,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class OperationServiceImpl implements OperationService {
+    private static final Logger log = Logger.getLogger(OperationServiceImpl.class.getName());
     private List<Operation> operations;
 
     public OperationServiceImpl(TransactionService gt) {
@@ -17,10 +20,14 @@ public class OperationServiceImpl implements OperationService {
 
     @Override
     public List<Operation> getOperationsByPeriodAndType(LocalDate dateSince, LocalDate dateTo, String type) {
-        if(type == null) throw new IllegalArgumentException("Тип не может быть null");
+        if(type == null) {
+            log.log(Level.SEVERE, "\"Type\" is null.");
+            throw new IllegalArgumentException("Тип не может быть null.");
+        }
 
         String lowerType = type.toLowerCase();
 
+        log.log(Level.FINE, "Find operations between " + dateSince + " and " + dateTo + "; by type: " + type + ".");
         return this.operations.stream()
                 .filter(filterByType(lowerType))
                 .filter(filterByDate(dateSince, dateTo))
@@ -38,19 +45,25 @@ public class OperationServiceImpl implements OperationService {
                 balance -= operation.getSum();
             }
         }
+        log.log(Level.FINE, "Balance was requested. Current balance: " + balance + ".");
         return balance;
     }
 
     @Override
     public List<Operation> getByType(String type) {
-        if(type == null) throw new IllegalArgumentException("Тип не может быть null");
+        if(type == null) {
+            log.log(Level.SEVERE, "\"Type\" is null.");
+            throw new IllegalArgumentException("Тип не может быть null.");
+        }
 
         String lowerType = type.toLowerCase();
+        log.log(Level.FINE, "Find operations by type: " + type + ".");
         return this.operations.stream().filter(filterByType(lowerType)).collect(Collectors.toList());
     }
 
     @Override
     public List<Operation> getByPeriod(LocalDate dateSince, LocalDate dateTo) {
+        log.log(Level.FINE, "Find operations between " + dateSince + " and " + dateTo + ".");
         return this.operations.stream().filter(filterByDate(dateSince, dateTo)).collect(Collectors.toList());
     }
 

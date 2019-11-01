@@ -1,0 +1,50 @@
+нояб. 01, 2019 11:57:30 PM DAO.StorageHandlerJson getAllOperations
+FINE: Unload all operations from .json file.
+нояб. 01, 2019 11:57:30 PM DAO.StorageHandlerJson getAllOperations
+FINE: Unload all operations from .json file.
+нояб. 01, 2019 11:57:30 PM service.TransactionServiceImpl load
+FINE: List of operations was initialized from file.
+нояб. 01, 2019 11:57:30 PM view.Menu printMenu
+FINE: print menu method started
+нояб. 01, 2019 11:57:32 PM view.Menu handleUserInput
+FINE: A list of all operations was requested.
+нояб. 01, 2019 11:57:33 PM view.Menu handleUserInput
+FINE: A list of all operations was requested.
+нояб. 01, 2019 11:57:34 PM view.Menu handleUserInput
+FINE: A list of all operations was requested.
+нояб. 01, 2019 11:57:34 PM view.Menu handleUserInput
+FINE: A list of all operations was requested.
+нояб. 01, 2019 11:57:36 PM service.OperationServiceImpl balance
+FINE: Balance was requested. Current balance: 140723.
+нояб. 01, 2019 11:57:57 PM service.OperationServiceImpl getOperationsByPeriodAndType
+FINE: Find operations between 2018-01-01 and 2019-12-31; by type: расход.
+нояб. 01, 2019 11:57:57 PM service.OperationServiceImpl getOperationsByPeriodAndType
+FINE: Find operations between 2018-01-01 and 2019-12-31; by type: расход.
+нояб. 01, 2019 11:57:57 PM view.Menu handleUserInput
+FINE: List of operations under specified conditions: 
+model.Operation{operationType='расход', sum='300', operationName='маникюр', familyMember='мама', operationDate='2019-05-01'};
+model.Operation{operationType='расход', sum='30990', operationName='смартфон', familyMember='сын', operationDate='2019-10-23'};
+model.Operation{operationType='расход', sum='47000', operationName='айфон', familyMember='сын', operationDate='2019-10-29'};
+model.Operation{operationType='расход', sum='87', operationName='бананы', familyMember='отец', operationDate='2019-10-27'};
+model.Operation{operationType='расход', sum='500', operationName='игрушка', familyMember='мама', operationDate='2019-08-31'};
+model.Operation{operationType='расход', sum='200', operationName='бананы', familyMember='мама', operationDate='2019-10-31'};
+model.Operation{operationType='расход', sum='200', operationName='сумка', familyMember='отец', operationDate='2019-10-31'};
+
+нояб. 01, 2019 11:58:17 PM service.OperationServiceImpl getOperationsByPeriodAndType
+FINE: Find operations between 2018-01-01 and 2019-12-31; by type: доход.
+нояб. 01, 2019 11:58:17 PM service.OperationServiceImpl getOperationsByPeriodAndType
+FINE: Find operations between 2018-01-01 and 2019-12-31; by type: доход.
+нояб. 01, 2019 11:58:17 PM view.Menu handleUserInput
+FINE: List of operations under specified conditions: 
+model.Operation{operationType='доход', sum='60000', operationName='зарплата', familyMember='отец', operationDate='2019-10-25'};
+model.Operation{operationType='доход', sum='100000', operationName='перевод', familyMember='мама', operationDate='2018-12-10'};
+model.Operation{operationType='доход', sum='5000', operationName='подарок', familyMember='отец', operationDate='2019-06-03'};
+model.Operation{operationType='доход', sum='50000', operationName='с_продажи_кроссовок', familyMember='сын', operationDate='2019-10-30'};
+model.Operation{operationType='доход', sum='5000', operationName='стипендия', familyMember='сын', operationDate='2019-10-25'};
+
+нояб. 01, 2019 11:58:19 PM view.Menu handleUserInput
+FINE: A list of all operations was requested.
+нояб. 01, 2019 11:58:21 PM service.OperationServiceImpl balance
+FINE: Balance was requested. Current balance: 140723.
+нояб. 01, 2019 11:58:22 PM view.Menu handleUserInput
+FINE: Shutdown...

@@ -12,24 +12,30 @@ import java.io.Reader;
 import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class StorageHandlerJson implements StorageHandler {
+    private static final Logger log = Logger.getLogger(StorageHandlerJson.class.getName());
+
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private String fileName;
+    private Type operationsFromJson;
 
     public StorageHandlerJson() {}
 
     public StorageHandlerJson(String fileName) {
         this.fileName = fileName;
+        this.operationsFromJson = new TypeToken<List<Operation>>(){}.getType();
     }
 
     @Override
     public List<Operation> getAllOperations() {
-        Type operationsFromJson = new TypeToken<List<Operation>>(){}.getType();
         try (Reader reader = new FileReader(fileName)) {
+            log.log(Level.FINE, "Unload all operations from .json file.");
             return gson.fromJson(reader, operationsFromJson);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.log(Level.SEVERE, "Failed unloading from .json file.", e);
         }
         return Collections.emptyList();
     }
@@ -38,8 +44,9 @@ public class StorageHandlerJson implements StorageHandler {
     public void saveAllOperations(List<Operation> operations) {
         try (FileWriter writer = new FileWriter(fileName)) {
             gson.toJson(operations, writer);
+            log.log(Level.FINE, "Upload all operations to .json file.");
         } catch (IOException e) {
-            e.printStackTrace();
+            log.log(Level.SEVERE, "Failed writing to .json file.", e);
         }
     }
 }

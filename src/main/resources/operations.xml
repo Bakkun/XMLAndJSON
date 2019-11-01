@@ -1,10 +1,3 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <operations>
-    <operation>
-        <operationDate>2010-10-10</operationDate>
-        <familyMember>мама</familyMember>
-        <operationName>премия</operationName>
-        <operationType>доход</operationType>
-        <sum>150000</sum>
-    </operation>
 </operations>
